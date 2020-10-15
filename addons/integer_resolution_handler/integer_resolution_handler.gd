@@ -5,9 +5,7 @@ extends Node
 # multiples of a base resolution in mind.
 
 
-onready var base_resolution := Vector2(
-	ProjectSettings.get_setting("display/window/integer_resolution_handler/base_width"),
-	ProjectSettings.get_setting("display/window/integer_resolution_handler/base_height"))
+var base_resolution := Vector2(320, 240)
 var stretch_mode: int
 var stretch_aspect: int
 onready var stretch_shrink: float = ProjectSettings.get_setting("display/window/stretch/shrink")
@@ -17,6 +15,14 @@ onready var _root: Viewport = get_node("/root")
 
 func _ready():
 	# Parse project settings
+	var base_width = ProjectSettings.get_setting("display/window/integer_resolution_handler/base_width")
+	var base_height = ProjectSettings.get_setting("display/window/integer_resolution_handler/base_height")
+
+	if base_width != null:
+		base_resolution.x = base_width
+	if base_height != null:
+		base_resolution.y = base_height
+
 	match ProjectSettings.get_setting("display/window/stretch/mode"):
 		"2d":
 			stretch_mode = SceneTree.STRETCH_MODE_2D
