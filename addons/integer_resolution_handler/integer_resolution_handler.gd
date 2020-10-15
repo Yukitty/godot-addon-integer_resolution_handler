@@ -4,6 +4,8 @@ extends Node
 # game screen scaling with exact integer
 # multiples of a base resolution in mind.
 
+const SETTING_BASE_WIDTH = "display/window/integer_resolution_handler/base_width"
+const SETTING_BASE_HEIGHT = "display/window/integer_resolution_handler/base_height"
 
 var base_resolution := Vector2(320, 240)
 var stretch_mode: int
@@ -15,13 +17,10 @@ onready var _root: Viewport = get_node("/root")
 
 func _ready():
 	# Parse project settings
-	var base_width = ProjectSettings.get_setting("display/window/integer_resolution_handler/base_width")
-	var base_height = ProjectSettings.get_setting("display/window/integer_resolution_handler/base_height")
-
-	if base_width != null:
-		base_resolution.x = base_width
-	if base_height != null:
-		base_resolution.y = base_height
+	if ProjectSettings.has_setting(SETTING_BASE_WIDTH):
+		base_resolution.x = ProjectSettings.get_setting(SETTING_BASE_WIDTH)
+	if ProjectSettings.has_setting(SETTING_BASE_HEIGHT):
+		base_resolution.y = ProjectSettings.get_setting(SETTING_BASE_HEIGHT)
 
 	match ProjectSettings.get_setting("display/window/stretch/mode"):
 		"2d":
