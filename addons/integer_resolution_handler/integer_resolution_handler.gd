@@ -81,7 +81,7 @@ func update_resolution():
 			_root.set_size((viewport_size / stretch_shrink).floor())
 			_root.set_attach_to_screen_rect(Rect2(margin, viewport_size))
 			_root.set_size_override_stretch(true)
-			_root.set_size_override(true, (screen_size / stretch_shrink).floor(), margin)
+			_root.set_size_override(true, (screen_size / stretch_shrink).floor())
 
 	if margin.x < 0:
 		margin.x = 0
