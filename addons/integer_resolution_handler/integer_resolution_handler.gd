@@ -65,6 +65,7 @@ func update_resolution():
 	var viewport_size: Vector2 = screen_size * scale
 	var overscan: Vector2 = ((video_mode - viewport_size) / scale).floor()
 	var margin: Vector2
+	var margin2: Vector2
 
 	match stretch_aspect:
 		SceneTree.STRETCH_ASPECT_KEEP_WIDTH:
@@ -74,7 +75,9 @@ func update_resolution():
 		SceneTree.STRETCH_ASPECT_EXPAND, SceneTree.STRETCH_ASPECT_IGNORE:
 			screen_size += overscan
 	viewport_size = screen_size * scale
-	margin = ((video_mode - viewport_size) / 2).round()
+	margin = (video_mode - viewport_size) / 2
+	margin2 = margin.ceil()
+	margin = margin.floor()
 
 	match stretch_mode:
 		SceneTree.STRETCH_MODE_VIEWPORT:
@@ -92,4 +95,8 @@ func update_resolution():
 		margin.x = 0
 	if margin.y < 0:
 		margin.y = 0
-	VisualServer.black_bars_set_margins(int(margin.x), int(margin.y), int(margin.x), int(margin.y))
+	if margin2.x < 0:
+		margin2.x = 0
+	if margin2.y < 0:
+		margin2.y = 0
+	VisualServer.black_bars_set_margins(int(margin.x), int(margin.y), int(margin2.x), int(margin2.y))
