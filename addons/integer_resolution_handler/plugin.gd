@@ -35,7 +35,6 @@ func _enter_tree():
 	ProjectSettings.set_order(SETTING_BASE_WIDTH, order)
 	ProjectSettings.set_order(SETTING_BASE_HEIGHT, order + 1)
 	ProjectSettings.save()
-	return
 
 
 func disable_plugin():
@@ -43,4 +42,4 @@ func disable_plugin():
 	ProjectSettings.clear("display/window/integer_resolution_handler/base_width")
 	ProjectSettings.clear("display/window/integer_resolution_handler/base_height")
 	ProjectSettings.save()
-	return
+
