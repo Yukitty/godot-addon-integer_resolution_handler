@@ -34,9 +34,13 @@ func _enter_tree():
 	var order: int = ProjectSettings.get_order("display/window/size/width") - 2
 	ProjectSettings.set_order(SETTING_BASE_WIDTH, order)
 	ProjectSettings.set_order(SETTING_BASE_HEIGHT, order + 1)
+	ProjectSettings.save()
+	return
 
 
-func _exit_tree():
+func disable_plugin():
 	remove_autoload_singleton("IntegerResolutionHandler")
 	ProjectSettings.clear("display/window/integer_resolution_handler/base_width")
 	ProjectSettings.clear("display/window/integer_resolution_handler/base_height")
+	ProjectSettings.save()
+	return
